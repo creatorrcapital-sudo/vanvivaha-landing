@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#1f3a2e" />
+<meta name="format-detection" content="telephone=no" />
+<title>Bellamonde at Vanvivaha</title>
+<meta name="description" content="Visiting the Bellamonde booth at Vanvivaha, 24–25 September? Register here as a couple or a vendor." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,500&family=Jost:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --forest: #1f3a2e;
+    --forest-deep: #142820;
+    --moss: #3f6b52;
+    --gold: #c9a45c;
+    --gold-soft: #e8d6ab;
+    --ivory: #faf6ee;
+    --paper: #ffffff;
+    --ink: #1d2420;
+    --muted: #5f6b64;
+    --line: #e4ddcd;
+    --error: #b3261e;
+    --gutter: 16px;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    font-family: "Jost", system-ui, -apple-system, sans-serif;
+    font-size: 16px;
+    color: var(--ink);
+    background: var(--ivory);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  h1, h2, h3 { font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600; line-height: 1.1; margin: 0; }
+  .wrap {
+    max-width: 1080px; margin: 0 auto;
+    padding-left: max(var(--gutter), env(safe-area-inset-left));
+    padding-right: max(var(--gutter), env(safe-area-inset-right));
+  }
+
+  /* ---------- Hero (compact on phones) ---------- */
+  .hero {
+    position: relative; overflow: hidden; color: var(--ivory);
+    background:
+      radial-gradient(600px 300px at 100% 0%, rgba(201,164,92,.28), transparent 60%),
+      radial-gradient(500px 400px at 0% 100%, rgba(63,107,82,.6), transparent 60%),
+      linear-gradient(160deg, var(--forest) 0%, var(--forest-deep) 100%);
+    padding: calc(18px + env(safe-area-inset-top)) 0 64px;
+  }
+  .topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; }
+  .brand { font-family: "Cormorant Garamond", serif; font-size: 1.3rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+  .booth-tag {
+    font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--gold-soft);
+    border: 1px solid rgba(232,214,171,.4); padding: 5px 10px; border-radius: 999px; white-space: nowrap;
+  }
+  .leaves { position: absolute; right: -70px; top: 30px; width: 260px; opacity: .12; pointer-events: none; }
+  .eyebrow { font-size: .78rem; letter-spacing: .24em; text-transform: uppercase; color: var(--gold-soft); margin: 0 0 8px; }
+  .hero h1 { font-size: clamp(2.4rem, 11vw, 4.6rem); letter-spacing: .005em; }
+  .hero h1 em { color: var(--gold); font-style: italic; font-weight: 500; }
+  .dates {
+    display: inline-flex; align-items: center; gap: 8px; margin: 14px 0 14px;
+    background: rgba(250,246,238,.08); border: 1px solid rgba(232,214,171,.25);
+    padding: 8px 14px; border-radius: 10px; font-size: .95rem;
+  }
+  .dates svg { color: var(--gold); flex: none; }
+  .hero p.lead { max-width: 520px; font-size: 1.02rem; color: rgba(250,246,238,.85); margin: 0; }
+
+  /* ---------- Form card (overlaps hero) ---------- */
+  .register { margin-top: -40px; position: relative; z-index: 2; padding-bottom: 40px; }
+  .card {
+    max-width: 560px; margin: 0 auto; background: var(--paper);
+    border: 1px solid var(--line); border-radius: 20px;
+    box-shadow: 0 14px 40px rgba(20,40,32,.12); overflow: hidden;
+  }
+  .card-head { padding: 22px 20px 6px; text-align: center; }
+  .card-head h2 { font-size: 1.85rem; color: var(--forest); }
+  .card-head p { margin: 4px 0 0; color: var(--muted); font-size: .95rem; }
+
+  .tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin: 16px 16px 0; padding: 5px; background: #f1ebdd; border-radius: 14px; }
+  .tab {
+    border: 0; background: transparent; min-height: 48px; border-radius: 10px; cursor: pointer;
+    font: 500 1rem "Jost", sans-serif; color: var(--muted); transition: background .2s, color .2s;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .tab[aria-selected="true"] { background: var(--forest); color: var(--ivory); box-shadow: 0 2px 8px rgba(20,40,32,.2); }
+
+  form { padding: 20px 16px 22px; }
+  form[hidden], .success[hidden], .reveal[hidden], #demo-note[hidden] { display: none; }
+  .field { margin-bottom: 18px; }
+  .field > label, .legend { display: block; font-weight: 500; font-size: .95rem; margin-bottom: 8px; color: var(--forest); }
+  input[type="text"], input[type="tel"], select {
+    width: 100%; min-height: 52px; padding: 12px 14px;
+    font: 400 16px "Jost", sans-serif; /* 16px stops iOS zooming on focus */
+    color: var(--ink); background: var(--ivory);
+    border: 1.5px solid var(--line); border-radius: 12px;
+    transition: border-color .2s, background .2s;
+    -webkit-appearance: none; appearance: none;
+  }
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%233f6b52' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 14px center; padding-right: 40px;
+  }
+  select:invalid { color: #8b928e; }
+  input:focus, select:focus { border-color: var(--moss); background-color: var(--paper); outline: none; }
+  .phone { display: flex; }
+  .phone span {
+    display: flex; align-items: center; padding: 0 12px; background: #efe8d8; color: var(--muted);
+    border: 1.5px solid var(--line); border-right: 0; border-radius: 12px 0 0 12px; font-size: 16px;
+  }
+  .phone input { border-radius: 0 12px 12px 0; min-width: 0; }
+
+  .chips { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .chip { position: relative; display: block; }
+  .chip input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .chip span {
+    display: flex; align-items: center; justify-content: center; text-align: center;
+    min-height: 48px; padding: 8px 10px; border: 1.5px solid var(--line); border-radius: 12px;
+    background: var(--ivory); cursor: pointer; font-size: .95rem; line-height: 1.2;
+    transition: background .15s, border-color .15s, color .15s; user-select: none;
+  }
+  .chip input:checked + span { background: var(--forest); border-color: var(--forest); color: var(--ivory); }
+  .chip input:focus-visible + span, .tab:focus-visible, .btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+  .reveal { margin-top: 10px; }
+  .err { color: var(--error); font-size: .86rem; margin-top: 6px; }
+  .err:empty { display: none; }
+  .invalid input[type="text"], .invalid input[type="tel"], .invalid select, .invalid .chip span, .invalid .phone span { border-color: var(--error); }
+
+  .btn {
+    display: flex; align-items: center; justify-content: center; width: 100%;
+    min-height: 54px; border: 0; border-radius: 14px; cursor: pointer; text-decoration: none;
+    font: 600 1.05rem "Jost", sans-serif; letter-spacing: .02em;
+    background: var(--forest); color: var(--ivory); transition: background .2s, transform .1s;
+  }
+  .btn:active { transform: scale(.99); }
+  .btn:hover { background: var(--moss); }
+  .btn[disabled] { opacity: .6; cursor: wait; }
+  .fineprint { font-size: .8rem; color: var(--muted); text-align: center; margin: 12px 0 0; }
+
+  .success { padding: 36px 20px 30px; text-align: center; }
+  .success .tick { width: 64px; height: 64px; border-radius: 50%; margin: 0 auto 16px; display: grid; place-items: center; background: var(--forest); color: var(--gold); }
+  .success h3 { font-size: 2rem; color: var(--forest); margin-bottom: 6px; }
+  .success p { color: var(--muted); margin: 0 0 18px; }
+  .success .btn { background: transparent; border: 1.5px solid var(--forest); color: var(--forest); }
+  .demo-note { font-size: .82rem; color: #7a5f22; background: #fbf3df; border: 1px solid var(--gold-soft); padding: 8px 12px; border-radius: 8px; display: inline-block; }
+
+  /* ---------- About ---------- */
+  .about { padding: 28px 0 44px; }
+  .kicker { font-size: .74rem; letter-spacing: .26em; text-transform: uppercase; color: var(--moss); font-weight: 600; }
+  .about h2 { font-size: clamp(1.9rem, 7vw, 2.8rem); color: var(--forest); margin: 8px 0 12px; }
+  .about p { color: var(--muted); margin: 0 0 12px; }
+  .pillars { display: grid; gap: 12px; margin-top: 20px; }
+  .pillar { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 16px; display: flex; gap: 14px; align-items: flex-start; }
+  .pillar .icon { flex: none; width: 40px; height: 40px; border-radius: 50%; background: var(--forest); color: var(--gold); display: grid; place-items: center; }
+  .pillar h3 { font-size: 1.3rem; color: var(--forest); margin-bottom: 2px; }
+  .pillar p { margin: 0; font-size: .93rem; }
+
+  footer {
+    background: var(--forest-deep); color: rgba(250,246,238,.7); font-size: .88rem; text-align: center;
+    padding: 26px 0 calc(26px + env(safe-area-inset-bottom));
+  }
+  footer .brand { color: var(--gold-soft); font-size: 1.1rem; display: block; margin-bottom: 4px; }
+
+  /* ---------- Larger screens ---------- */
+  @media (min-width: 900px) {
+    .hero { padding: 28px 0 120px; }
+    .topbar { margin-bottom: 56px; }
+    .leaves { width: 480px; right: -60px; }
+    .hero p.lead { font-size: 1.15rem; }
+    .register { margin-top: -80px; }
+    .card-head { padding-top: 30px; }
+    form { padding: 26px 30px 30px; }
+    .tabs { margin: 18px 30px 0; }
+    .about { padding: 60px 0 80px; }
+    .about-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; align-items: center; }
+    .pillars { margin-top: 0; }
+  }
+  @media (max-width: 360px) {
+    :root { --gutter: 12px; }
+    .booth-tag { display: none; }
+    .chip span { font-size: .9rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <svg class="leaves" viewBox="0 0 200 200" aria-hidden="true">
+    <g fill="none" stroke="#e8d6ab" stroke-width="1.2">
+      <path d="M100 190 C100 120 100 60 100 10" />
+      <path d="M100 150 C70 140 50 120 40 95 C70 100 90 120 100 150Z" />
+      <path d="M100 150 C130 140 150 120 160 95 C130 100 110 120 100 150Z" />
+      <path d="M100 110 C75 100 60 80 55 55 C80 62 95 82 100 110Z" />
+      <path d="M100 110 C125 100 140 80 145 55 C120 62 105 82 100 110Z" />
+      <path d="M100 70 C85 60 78 45 78 28 C92 36 100 50 100 70Z" />
+      <path d="M100 70 C115 60 122 45 122 28 C108 36 100 50 100 70Z" />
+    </g>
+  </svg>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">Bellamonde</div>
+      <div class="booth-tag">Booth at Vanvivaha</div>
+    </div>
+    <p class="eyebrow">Welcome to Bellamonde at</p>
+    <h1>Van<em>vivaha</em></h1>
+    <div class="dates">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+      <span>24 &amp; 25 September</span>
+    </div>
+    <p class="lead">Thanks for stopping by our booth! Register below, whether you're a couple planning your celebration or a vendor, and the Bellamonde team will be in touch.</p>
+  </div>
+</header>
+
+<main>
+  <section class="register" id="register">
+    <div class="wrap">
+      <div class="card">
+        <div class="card-head">
+          <h2>Register with us</h2>
+          <p>Takes less than a minute</p>
+        </div>
+
+        <div class="tabs" role="tablist" aria-label="Registration type">
+          <button class="tab" role="tab" id="tab-couple" aria-controls="form-couple" aria-selected="true" type="button">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z"/></svg>
+            Couple
+          </button>
+          <button class="tab" role="tab" id="tab-vendor" aria-controls="form-vendor" aria-selected="false" type="button">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21V9l9-6 9 6v12"/><path d="M9 21v-6h6v6"/></svg>
+            Vendor
+          </button>
+        </div>
+
+        <!-- Couple form -->
+        <form id="form-couple" role="tabpanel" aria-labelledby="tab-couple" novalidate data-type="couple">
+          <div class="field">
+            <label for="c-name">Your name</label>
+            <input id="c-name" name="name" type="text" autocomplete="name" autocapitalize="words" enterkeyhint="next" required maxlength="80" placeholder="e.g. Priya &amp; Arjun" />
+            <div class="err"></div>
+          </div>
+          <div class="field">
+            <label for="c-phone">Phone number</label>
+            <div class="phone"><span>+91</span><input id="c-phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" enterkeyhint="next" required placeholder="10-digit mobile number" /></div>
+            <div class="err"></div>
+          </div>
+          <div class="field" data-group="function">
+            <span class="legend" id="fn-label">Function type</span>
+            <div class="chips" role="radiogroup" aria-labelledby="fn-label">
+              <label class="chip"><input type="radio" name="function" value="Wedding" /><span>Wedding</span></label>
+              <label class="chip"><input type="radio" name="function" value="Ring Ceremony" /><span>Ring Ceremony</span></label>
+              <label class="chip"><input type="radio" name="function" value="Reception" /><span>Reception</span></label>
+              <label class="chip"><input type="radio" name="function" value="Other" /><span>Other</span></label>
+            </div>
+            <div class="reveal" hidden>
+              <input name="functionOther" type="text" maxlength="80" autocapitalize="sentences" placeholder="Which function? (e.g. Haldi, Sangeet)" aria-label="Other function type" />
+            </div>
+            <div class="err"></div>
+          </div>
+          <div class="field" data-group="guests">
+            <span class="legend" id="guests-label">Approximate gathering</span>
+            <div class="chips" role="radiogroup" aria-labelledby="guests-label">
+              <label class="chip"><input type="radio" name="guests" value="Under 100" /><span>Under 100</span></label>
+              <label class="chip"><input type="radio" name="guests" value="100–250" /><span>100 – 250</span></label>
+              <label class="chip"><input type="radio" name="guests" value="250–500" /><span>250 – 500</span></label>
+              <label class="chip"><input type="radio" name="guests" value="500–1000" /><span>500 – 1000</span></label>
+              <label class="chip" style="grid-column:1/-1"><input type="radio" name="guests" value="1000+" /><span>1000+</span></label>
+            </div>
+            <div class="err"></div>
+          </div>
+          <button type="submit" class="btn submit">Register</button>
+          <p class="fineprint">By registering, you agree to be contacted by Bellamonde.</p>
+        </form>
+
+        <!-- Vendor form -->
+        <form id="form-vendor" role="tabpanel" aria-labelledby="tab-vendor" novalidate data-type="vendor" hidden>
+          <div class="field">
+            <label for="v-name">Name / Business name</label>
+            <input id="v-name" name="name" type="text" autocomplete="organization" autocapitalize="words" enterkeyhint="next" required maxlength="80" placeholder="e.g. Green Leaf Decor" />
+            <div class="err"></div>
+          </div>
+          <div class="field">
+            <label for="v-phone">Phone number</label>
+            <div class="phone"><span>+91</span><input id="v-phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" enterkeyhint="next" required placeholder="10-digit mobile number" /></div>
+            <div class="err"></div>
+          </div>
+          <div class="field">
+            <label for="v-type">Type of vendor</label>
+            <select id="v-type" name="vendorType" required>
+              <option value="" disabled selected>Select a category</option>
+              <option>Photography &amp; Videography</option>
+              <option>Decor &amp; Florals</option>
+              <option>Catering</option>
+              <option>Venue</option>
+              <option>Wedding Planner</option>
+              <option>Makeup &amp; Hair</option>
+              <option>Mehendi Artist</option>
+              <option>Bridal &amp; Groom Wear</option>
+              <option>Jewellery</option>
+              <option>Music, DJ &amp; Entertainment</option>
+              <option>Invitations &amp; Gifting</option>
+              <option>Other</option>
+            </select>
+            <div class="reveal" hidden>
+              <input name="vendorTypeOther" type="text" maxlength="80" autocapitalize="sentences" placeholder="Tell us your category" aria-label="Other vendor type" />
+            </div>
+            <div class="err"></div>
+          </div>
+          <button type="submit" class="btn submit">Register</button>
+          <p class="fineprint">By registering, you agree to be contacted by Bellamonde.</p>
+        </form>
+
+        <div class="success" id="success" hidden role="status" aria-live="polite">
+          <div class="tick"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+          <h3>You're registered!</h3>
+          <p id="success-msg">Thank you. The Bellamonde team will be in touch soon.</p>
+          <p id="demo-note" hidden><span class="demo-note">Demo mode: saved in this browser only. Add your Google Sheet URL to collect registrations.</span></p>
+          <button class="btn" id="again" type="button">Register someone else</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="wrap about-grid">
+      <div>
+        <div class="kicker">About Bellamonde</div>
+        <h2>Celebrations, thoughtfully crafted</h2>
+        <p>Bellamonde is at Vanvivaha to meet couples planning their big day and the vendors who bring those days to life.</p>
+        <p>Register above and we'll follow up after the event.</p>
+      </div>
+      <div class="pillars">
+        <div class="pillar">
+          <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z"/></svg></div>
+          <div><h3>For couples</h3><p>Tell us about your function and we'll reach out to help plan it.</p></div>
+        </div>
+        <div class="pillar">
+          <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 21V9l9-6 9 6v12"/><path d="M9 21v-6h6v6"/></svg></div>
+          <div><h3>For vendors</h3><p>Join the Bellamonde network and work with us on upcoming celebrations.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="brand">Bellamonde</span>
+    At Vanvivaha · 24 &amp; 25 September · © <span id="yr"></span>
+  </div>
+</footer>
+
+<script>
+  /* ==========================================================
+     SETUP: paste your Google Apps Script Web App URL here.
+     See apps-script.gs + README.md. Leave empty for demo mode.
+     ========================================================== */
+  const SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbxjD6YjmxoILiTESK7aUiytRrQJk8HFaw8GXhG18T4hZML-Dx-iZvVZPc0dzGKAeuXH/exec";
+
+  document.getElementById("yr").textContent = new Date().getFullYear();
+
+  const tabs = { couple: document.getElementById("tab-couple"), vendor: document.getElementById("tab-vendor") };
+  const forms = { couple: document.getElementById("form-couple"), vendor: document.getElementById("form-vendor") };
+  const success = document.getElementById("success");
+  let current = "couple";
+
+  function show(type) {
+    current = type;
+    for (const k of ["couple", "vendor"]) {
+      tabs[k].setAttribute("aria-selected", String(k === type));
+      forms[k].hidden = k !== type;
+    }
+    success.hidden = true;
+  }
+  tabs.couple.addEventListener("click", () => show("couple"));
+  tabs.vendor.addEventListener("click", () => show("vendor"));
+
+  // "Other" reveal: couple function chips
+  const fnReveal = forms.couple.querySelector('[data-group="function"] .reveal');
+  forms.couple.querySelectorAll('input[name="function"]').forEach(r =>
+    r.addEventListener("change", () => {
+      fnReveal.hidden = r.value !== "Other";
+      if (!fnReveal.hidden) fnReveal.querySelector("input").focus();
+    })
+  );
+  // "Other" reveal: vendor type
+  const vType = document.getElementById("v-type");
+  const vReveal = vType.parentElement.querySelector(".reveal");
+  vType.addEventListener("change", () => {
+    vReveal.hidden = vType.value !== "Other";
+    if (!vReveal.hidden) vReveal.querySelector("input").focus();
+  });
+
+  // Phone: keep digits only, and accept pasted "+91 98765 43210" / "098765..." formats
+  document.querySelectorAll('input[type="tel"]').forEach(i =>
+    i.addEventListener("input", () => {
+      let v = i.value.replace(/\D/g, "");
+      if (v.length > 10 && v.startsWith("91")) v = v.slice(2);
+      if (v.length > 10 && v.startsWith("0")) v = v.slice(1);
+      i.value = v.slice(0, 10);
+    })
+  );
+
+  // Clear a field's error as soon as the user fixes it
+  document.querySelectorAll(".field").forEach(f =>
+    f.addEventListener("input", () => setErr(f, ""))
+  );
+
+  function setErr(field, msg) {
+    field.classList.toggle("invalid", !!msg);
+    field.querySelector(".err").textContent = msg || "";
+  }
+
+  function validate(form) {
+    const d = Object.fromEntries(new FormData(form));
+    const fields = form.querySelectorAll(".field");
+    let ok = true;
+    const fail = (i, m) => { setErr(fields[i], m); ok = false; };
+    fields.forEach(f => setErr(f, ""));
+
+    if (!d.name || d.name.trim().length < 2) fail(0, "Please enter your name.");
+    if (!/^[6-9]\d{9}$/.test(d.phone || "")) fail(1, "Enter a valid 10-digit mobile number.");
+
+    if (form.dataset.type === "couple") {
+      if (!d.function) fail(2, "Please choose a function type.");
+      else if (d.function === "Other" && !(d.functionOther || "").trim()) fail(2, "Please tell us the function.");
+      if (!d.guests) fail(3, "Please choose the approximate gathering.");
+    } else {
+      if (!d.vendorType) fail(2, "Please select your vendor type.");
+      else if (d.vendorType === "Other" && !(d.vendorTypeOther || "").trim()) fail(2, "Please tell us your category.");
+    }
+    if (!ok) {
+      const first = form.querySelector(".invalid");
+      first.scrollIntoView({ behavior: "smooth", block: "center" });
+      const input = first.querySelector('input[type="text"], input[type="tel"], select');
+      if (input && !input.closest("[hidden]")) input.focus({ preventScroll: true });
+    }
+    return ok ? d : null;
+  }
+
+  function buildRecord(type, d) {
+    const base = { type, name: d.name.trim(), phone: "+91" + d.phone, submittedAt: new Date().toISOString() };
+    if (type === "couple") {
+      return { ...base, functionType: d.function === "Other" ? "Other: " + d.functionOther.trim() : d.function, guests: d.guests };
+    }
+    return { ...base, vendorType: d.vendorType === "Other" ? "Other: " + d.vendorTypeOther.trim() : d.vendorType };
+  }
+
+  async function send(record) {
+    if (!SHEET_ENDPOINT) {
+      // Demo mode — keep a local copy so the flow can be tested end to end.
+      try {
+        const all = JSON.parse(localStorage.getItem("vanvivaha_registrations") || "[]");
+        all.push(record);
+        localStorage.setItem("vanvivaha_registrations", JSON.stringify(all));
+      } catch (e) {}
+      return { demo: true };
+    }
+    // Apps Script doesn't return CORS headers, so post as a simple form request.
+    await fetch(SHEET_ENDPOINT, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams(record).toString(),
+    });
+    return { demo: false };
+  }
+
+  for (const form of Object.values(forms)) {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      document.activeElement?.blur(); // close the phone keyboard
+      const d = validate(form);
+      if (!d) return;
+      const btn = form.querySelector(".submit");
+      btn.disabled = true; btn.textContent = "Registering…";
+      try {
+        const res = await send(buildRecord(form.dataset.type, d));
+        form.reset();
+        form.querySelectorAll(".reveal").forEach(r => r.hidden = true);
+        form.hidden = true;
+        document.getElementById("success-msg").textContent = form.dataset.type === "vendor"
+          ? "Thank you. The Bellamonde team will contact you about working together."
+          : "Thank you. The Bellamonde team will reach out to you soon.";
+        document.getElementById("demo-note").hidden = !res.demo;
+        success.hidden = false;
+        success.scrollIntoView({ behavior: "smooth", block: "center" });
+      } catch (err) {
+        alert("Couldn't submit — please check your internet connection and try again.");
+      } finally {
+        btn.disabled = false; btn.textContent = "Register";
+      }
+    });
+  }
+
+  document.getElementById("again").addEventListener("click", () => show(current));
+</script>
+</body>
+</html>
